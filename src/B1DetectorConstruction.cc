@@ -39,9 +39,9 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   //
   G4double world_sizeXY = 2*cm;
   G4double world_sizeZ  = 20*cm;
-  G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
+  G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
   G4Material* tgtMat = nist->FindOrBuildMaterial("G4_VITON");
-  G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Al");
+  G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Galactic");
   G4double shieldThickness = 2*cm;
 
   // G4Material* tgtMat = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
@@ -76,7 +76,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 	      0.5*2*cm, 0.5*2*cm, 0.5*1*mm); //its size
   G4Box* solidMid =    
     new G4Box("solidFB",                    //its name
-	      0.5*2*cm, 0.5*2*cm, 0.5*1*cm); //its size
+	      0.5*2*cm, 0.5*2*cm, 0.5*1*mm); //its size
 
   G4LogicalVolume* logicSh =                         
     new G4LogicalVolume(solidSh,            //its solid
@@ -105,7 +105,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     checkOverlaps);          //overlaps checking
  
   new G4PVPlacement(0,                       //no rotation
-                    G4ThreeVector(0,0,-5.5*mm),
+                    G4ThreeVector(0,0,-1.1*mm),
                     logicF,                //its logical volume
                     "front",              //its name
                     logicWorld,              //its mother  volume
@@ -114,7 +114,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     checkOverlaps);          //overlaps checking
  
   new G4PVPlacement(0,                       //no rotation
-                    G4ThreeVector(0,0,5.5*mm),
+                    G4ThreeVector(0,0,1.1*mm),
                     logicB,                //its logical volume
                     "back",              //its name
                     logicWorld,              //its mother  volume
