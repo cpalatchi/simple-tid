@@ -5,7 +5,7 @@
 #/run/printProgress 500000
 #/run/beamOn 5000000
 
-/run/printProgress 1000
-/run/beamOn 1000
+/run/printProgress 10000
+/run/beamOn 10000
 
 
