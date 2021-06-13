@@ -1,5 +1,5 @@
 void printTotal(){
-  TFile *fin=TFile::Open("ehist_10runs.root","READ");
+  TFile *fin=TFile::Open("ehist_100runs.root","READ");
 
   const string hNm[4]={"gamma","em","ep","n"};
   //  for(int i=0;i<4;i++){
