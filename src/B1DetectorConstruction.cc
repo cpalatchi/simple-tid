@@ -41,9 +41,9 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   G4double world_sizeZ  = 20*cm;
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
   G4Material* tgtMat = nist->FindOrBuildMaterial("G4_VITON");
-  G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Galactic");
-  G4double shieldThickness = 2*cm;
-
+  G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Al");
+  G4double shieldThickness = 2.5*cm;
+  //G4_STAINLESS-STEEL
   // G4Material* tgtMat = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
   // G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Pb");
   //G4double shieldThickness = 5*cm;
