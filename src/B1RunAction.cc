@@ -140,8 +140,13 @@ void B1RunAction::EndOfRunAction(const G4Run* run)
     //  << "------------------------------------------------------------"
     //  << G4endl
     //  << G4endl;
+    G4cout <<"(front/middle/back=0/1/2)"<<" "<< "nofEvents" << " " << "dose/gray" << " " << "rmsDose/gray"  <<" "<< "mass/kg" << " " << "edep/MeV" << " " << "rms/MeV" <<G4endl;
+ 
+    G4cout <<i<<" "<< nofEvents << " " << dose/gray << " " << rmsDose/gray <<" "<< mass/kg << " " << edep << " " << rms <<G4endl;
+    //    G4cout << "gray"  << " " << "kg" <<" "<< "eV"<<G4endl;
+    //    G4cout << gray << " " << kg <<" "<< eV <<G4endl;
 
-    G4cout << nofEvents << " " << dose/gray << " " << rmsDose/gray <<G4endl;
+
   }
 }
   
