@@ -11,6 +11,7 @@
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
 
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 B1DetectorConstruction::B1DetectorConstruction()
@@ -37,12 +38,43 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   //     
   // World
   //
+  //add new material --caryn
+  G4Material* matNi = nist->FindOrBuildMaterial("G4_Ni");
+  G4Material* matCu = nist->FindOrBuildMaterial("G4_Cu");
+  G4Material* matMo = nist->FindOrBuildMaterial("G4_Mo");
+
+  G4Material* matinconel625 = new G4Material( "Inconel625",
+  					      8.442 * g/cm3,
+  					     3);
+  //(0.305 lbs/in3)(453.592 g/lb)(in/2.54 cm)^3=8.442g/cm2
+    matinconel625->AddMaterial(matNi,  70 * perCent);
+    matinconel625->AddMaterial(matCu,  20 * perCent);
+   matinconel625->AddMaterial(matMo,  10 * perCent);
+
+    //  G4Material* matinconel625 = new G4Material(name = "Inconel625",
+  //					     density = 1 * g/cm2,
+  //					     ncomponents =3);
+  //  matinconel625->AddMaterial(matNi, fractionmass = 70 * perCent);
+  //  matinconel625->AddMaterial(matCu, fractionmass = 20 * perCent);
+  //  matinconel625->AddMaterial(matMo, fractionmass = 10 * perCent);
+
+
+  //
+
+
   G4double world_sizeXY = 2*cm;
   G4double world_sizeZ  = 20*cm;
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
   G4Material* tgtMat = nist->FindOrBuildMaterial("G4_VITON");
-  G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Al");
-  G4double shieldThickness = 2.5*cm;
+  //   G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Al");
+    G4Material* shieldMat = matinconel625;
+  G4double shieldThickness = 1.25*cm;
+  //  G4Material* shield2Mat = matinconel625;
+     G4Material* shield2Mat = nist->FindOrBuildMaterial("G4_Al");
+  G4double shield2Thickness = 2.5*cm;
+
+
+
   //G4_STAINLESS-STEEL
   // G4Material* tgtMat = nist->FindOrBuildMaterial("G4_SILICON_DIOXIDE");
   // G4Material* shieldMat = nist->FindOrBuildMaterial("G4_Pb");
@@ -70,6 +102,11 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   G4Box* solidSh =    
     new G4Box("solidSh",                    //its name
 	      0.5*2*cm, 0.5*2*cm, 0.5*shieldThickness); //its size
+
+  G4Box* solidSh2 =    
+    new G4Box("solidSh2",                    //its name
+	      0.5*2*cm, 0.5*2*cm, 0.5*shield2Thickness); //its size
+
                      
   G4Box* solidFB =    
     new G4Box("solidFB",                    //its name
@@ -82,6 +119,13 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
     new G4LogicalVolume(solidSh,            //its solid
                         shieldMat,             //its material
                         "logicSh");         //its name
+
+  G4LogicalVolume* logicSh2 =                         
+    new G4LogicalVolume(solidSh2,            //its solid
+                        shield2Mat,             //its material
+                        "logicSh2");         //its name
+
+
   G4LogicalVolume* logicF =                         
     new G4LogicalVolume(solidFB,            //its solid
                         tgtMat,             //its material
@@ -103,6 +147,16 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     false,                   //no boolean operation
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
+
+  new G4PVPlacement(0,                       //no rotation
+                    G4ThreeVector(0,0,2*cm),
+                    logicSh2,                //its logical volume
+                    "shield2",              //its name
+                    logicWorld,              //its mother  volume
+                    false,                   //no boolean operation
+                    0,                       //copy number
+                    checkOverlaps);          //overlaps checking
+
  
   new G4PVPlacement(0,                       //no rotation
                     G4ThreeVector(0,0,-1.1*mm),
