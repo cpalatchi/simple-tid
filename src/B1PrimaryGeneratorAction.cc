@@ -30,7 +30,11 @@ B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
   fParticleGun->SetParticleEnergy(6.*MeV);
   //fin=TFile::Open("./beamGeoV2_radAnaV5.root","READ");
   //  fin=TFile::Open("./tgtFlangeRadLevelV0.root","READ");
-   fin=TFile::Open("./ehist_100runs.root","READ");
+  //             fin=TFile::Open("./ehist72_1000runs.root","READ");
+  //     fin=TFile::Open("./ehist72_Asym_1000runs_fullbellows.root","READ");
+                 fin=TFile::Open("./ehist_100runs.root","READ");
+  //       fin=TFile::Open("./ehist_Asym_1000runs.root","READ");
+
   if(fin){
     fin->ls();
   }else{
